@@ -9,18 +9,28 @@ Simple tools to download, organize and process the MPI-INF-3DHP human pose estim
 - `ffmpeg` for frame extraction
 - Approximately 25GB of disk space for the complete training set
 
+## Repository Structure
+
+```
+.
+├── scripts/  - Shell scripts for dataset retrieval and processing
+├── tools/    - Python tools for data extraction and visualization
+├── assets/   - Example images and documentation resources
+└── config    - Configuration for dataset download
+```
+
 ## Quick Start
 
 1. **Download and organize the dataset:**
    ```bash
-   ./get_dataset.sh
+   ./scripts/get_dataset.sh
    ```
 
 2. **Extract frames from videos:**
    ```bash
-   ./extract_frames.sh --fps 0  # Extract all frames
+   ./scripts/extract_frames.sh --fps 0  # Extract all frames
    # OR
-   ./extract_frames.sh --fps 1  # Extract 1 frame per second
+   ./scripts/extract_frames.sh --fps 1  # Extract 1 frame per second
    ```
 
 3. **Install requirements:**
@@ -30,24 +40,24 @@ Simple tools to download, organize and process the MPI-INF-3DHP human pose estim
 
 4. **Extract joint positions:**
    ```bash
-   python extract_joints.py
+   python tools/extract_joint_landmarks.py
    ```
 
 5. **Clean up unmatched JSON files:**
    ```bash
-   python clean_landmarks.py
+   python tools/clean_unmatched_landmarks.py
    ```
 
 6. **Visualize joint annotations:**
    ```bash
-   python visualize_joints.py          # Browse in order
+   python tools/visualize_joints.py          # Browse in order
    # OR
-   python visualize_joints.py --shuffle  # Randomize viewing order
+   python tools/visualize_joints.py --shuffle  # Randomize viewing order
    ```
 
 7. **[Optional] Clean up original dataset files:**
    ```bash
-   ./cleanup.sh
+   ./scripts/cleanup.sh
    ```
 
 ## Example Visualizations
@@ -60,8 +70,8 @@ Simple tools to download, organize and process the MPI-INF-3DHP human pose estim
 
 - **get_dataset.sh**: Downloads the MPI-INF-3DHP dataset and organizes files into a clean structure with subject_XX and sequence_XX folders
 - **extract_frames.sh**: Extracts frames from videos into JPG files with `--fps` option to control frame rate
-- **extract_joints.py**: Processes annotation files to extract 3D joint positions for each frame
-- **clean_landmarks.py**: Ensures joint annotation files match extracted frames
+- **extract_joint_landmarks.py**: Processes annotation files to extract 3D joint positions for each frame
+- **clean_unmatched_landmarks.py**: Ensures joint annotation files match extracted frames
 - **visualize_joints.py**: Interactive visualization of skeleton overlays on dataset images
 - **cleanup.sh**: [Optional] Removes original subject directories and util folders after processing to save disk space
 
