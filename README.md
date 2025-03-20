@@ -5,7 +5,7 @@ Simple tools to download, organize and process the MPI-INF-3DHP human pose estim
 ## Requirements
 
 - Python 3.6+
-- Required Python packages: `scipy`, `numpy`
+- Required Python packages: `scipy`, `numpy`, `opencv`
 - `ffmpeg` for frame extraction
 - Approximately 25GB of disk space for the complete training set
 
@@ -23,20 +23,38 @@ Simple tools to download, organize and process the MPI-INF-3DHP human pose estim
    ./extract_frames.sh --fps 1  # Extract 1 frame per second
    ```
 
-3. **Extract joint positions:**
+3. **Install requirements:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Extract joint positions:**
    ```bash
    python extract_joints.py
    ```
 
-4. **Clean up unmatched JSON files:**
+5. **Clean up unmatched JSON files:**
    ```bash
    python clean_landmarks.py
    ```
 
-5. **[Optional] Clean up original dataset files:**
+6. **Visualize joint annotations:**
+   ```bash
+   python visualize_joints.py          # Browse in order
+   # OR
+   python visualize_joints.py --shuffle  # Randomize viewing order
+   ```
+
+7. **[Optional] Clean up original dataset files:**
    ```bash
    ./cleanup.sh
    ```
+
+## Example Visualizations
+
+![Example visualization 1](assets/crop_01.png)
+
+![Example visualization 2](assets/crop_02.png)
 
 ## What These Scripts Do
 
@@ -44,6 +62,7 @@ Simple tools to download, organize and process the MPI-INF-3DHP human pose estim
 - **extract_frames.sh**: Extracts frames from videos into JPG files with `--fps` option to control frame rate
 - **extract_joints.py**: Processes annotation files to extract 3D joint positions for each frame
 - **clean_landmarks.py**: Ensures joint annotation files match extracted frames
+- **visualize_joints.py**: Interactive visualization of skeleton overlays on dataset images
 - **cleanup.sh**: [Optional] Removes original subject directories and util folders after processing to save disk space
 
 ## Dataset Structure After Processing
